@@ -17,6 +17,7 @@ export default createSwitchNavigator (
             }
         },
         {
-            initialRouteName: "ScreenWelcome"
+            // initialRouteName: "ScreenWelcome"
+            initialRouteName: "ScreenLogin"
         }
     );
