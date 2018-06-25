@@ -14,7 +14,7 @@ export default class ScreenWelcome extends Component<any, any> {
         super(props);
     }
     componentDidMount() {
-        // setTimeout(() => {this.props.navigation.navigate('ScreenLogin')}, 2000);
+        setTimeout(() => {this.props.navigation.navigate('ScreenLogin')}, 100);
     }
     render() {
         return <View style={styles.container}>
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
+        backgroundColor: "#FFFFFF",
     },
     logoContainer:{
         flex:5,

@@ -6,7 +6,7 @@ import {
     StyleSheet,
     Image
 } from 'react-native';
-import { Input } from 'react-native-elements';
+import { Input, CheckBox, Button } from 'react-native-elements';
 export default class ScreenLogin extends Component<any, any> {
     constructor(props: any) {
         super(props);
@@ -23,27 +23,55 @@ export default class ScreenLogin extends Component<any, any> {
             </View>
             <View style={styles.loginContainer}>
                 <View style={styles.userNameContainer}>
-                    <Text style={styles.labelStyle}>Tên người dùng</Text>
+                    <View style={styles.labelContainer}>
+                        <Text style={styles.labelStyle}>Tên người dùng</Text>
+                        <Image style={styles.star} source={require('../image/attention-star.png')}></Image>
+                    </View>
+
                     <Input
                         // placeholder='Tên người dùng'
                         shake={true}
+                        containerStyle={{ width: "100%", marginTop: 5 }}
                         inputContainerStyle={styles.inputComponentStyle}
                         inputStyle={styles.inputStyle}
                     />
                 </View>
                 <View style={styles.passwordContainer}>
-                    <Text style={styles.labelStyle}>Mật khẩu</Text>
+                    <View style={styles.labelContainer}>
+                        <Text style={styles.labelStyle}>Mật khẩu</Text>
+                        <Image style={styles.star} source={require('../image/attention-star.png')}></Image>
+                    </View>
                     <Input
                         // placeholder='Mật khẩu'
                         shake={true}
+                        containerStyle={{ width: "100%", marginTop: 5 }}
+                        inputContainerStyle={styles.inputComponentStyle}
+                        inputStyle={styles.inputStyle}
+                        rightIcon={<Image style={styles.eyeIcon} source={require('../image/eye.png')}></Image>}
                     />
                 </View>
                 <View style={styles.remembervsreset}>
-
+                    <CheckBox
+                        checkedIcon={<Image source={require('../image/checked.png')} />}
+                        uncheckedIcon={<Image source={require('../image/unchecked.png')} />}
+                        title="Ghi nhớ"
+                        textStyle={styles.rememberText}
+                        containerStyle={styles.rememberContainer}
+                    />
+                    <Text style={styles.resetPass}>Lấy lại mật khẩu?</Text>
                 </View>
-                <View style={styles.loginButton}>
-
-                </View>
+                <Button
+                    title="Đăng nhập"
+                    titleStyle={{ color: "#FFFFFF", fontSize: 17 }}
+                    buttonStyle={{
+                        backgroundColor: "#1A91EB",
+                        width: "100%",
+                        height: 36,
+                        borderWidth: 0,
+                        borderRadius: 4,
+                    }}
+                    containerStyle={{ width: "100%", shadowColor: "#FFFFFF", marginTop: 10 }}
+                />
             </View>
         </View>
     }
@@ -53,6 +81,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
+        backgroundColor: "#FFFFFF"
     },
     logoContainer: {
         marginTop: 15,
@@ -64,8 +93,8 @@ const styles = StyleSheet.create({
         flex: 7,
         // justifyContent: "center",
         alignItems: "center",
-        paddingLeft: 20,
-        paddingRight: 20,
+        paddingLeft: 42,
+        paddingRight: 42,
     },
     logo: {
 
@@ -76,16 +105,19 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     inputComponentStyle: {
-        marginTop: 5,
+        // marginTop: 5,
         width: "100%",
         borderWidth: 1,
         borderColor: "#DFE3E9",
         borderRadius: 4,
+        // padding:0
+        height: 37,
     },
-    inputStyle:{
-        color:"#354052",
-        fontSize:14,
-        margin:-2
+    inputStyle: {
+        color: "#354052",
+        fontSize: 14,
+        // margin:-3,
+        marginTop: 10
     },
     labelStyle: {
         fontSize: 14,
@@ -95,12 +127,39 @@ const styles = StyleSheet.create({
 
     },
     passwordContainer: {
-
+        marginTop: 15
     },
     remembervsreset: {
-
+        flexDirection: 'row',
+        justifyContent: "space-between",
+        alignItems: "center",
+        // backgroundColor:"green",
+        width: "100%"
     },
-    loginButton: {
-
+    eyeIcon: {
+        marginRight: 10
+    },
+    labelContainer: {
+        // flex: 1,
+        flexDirection: 'row',
+        justifyContent: "space-between"
+    },
+    star: {
+        marginTop: 3,
+        marginRight: 3
+    },
+    rememberText: {
+        color: "#999fa8",
+        fontSize: 16
+    },
+    resetPass: {
+        color: "#1A91EB",
+        fontSize: 14,
+        // marginRight: 17
+    },
+    rememberContainer: {
+        backgroundColor: "#FFFFFF",
+        marginLeft: -12,
+        borderWidth: 0
     }
 });
