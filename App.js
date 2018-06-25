@@ -1,58 +1,73 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
+//@flow
+//khong dung nua
 import React, { Component } from 'react';
 import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
+  AsyncStorage
 } from 'react-native';
+// import Network from './app/api/Network';
+import { AuthenticationStack } from './app/routes/AuthenticationStack';
+import ScreenWelcome from './app/screen/ScreenWelcome'
+export default class App extends Component<{}, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      select:false,
+      isStarted:false,
+    };
+  };
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+  componentDidMount() {
+    // this.unsubscribe = AppStorage.subscribe((state) => {
+    //   let that=this;
+    //   switch (state.event) {
+    //     case "SAVE_TOKEN":
+    //       UsersApi.getUserProfile(data => {
+    //         UsersApi.getUserDevices((data: Array<Device>) => {
+    //           AppStorage.postEvent("SAVE_USER_DEVICES", data);
+    //           let devices = data.map((device) => {
+    //             return device.id;
+    //           });
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
-    );
+    //           let devicesId: string = devices.join(",");
+    //           Socket.OpenCommonWS(devicesId);
+    //           this.setState({ select: "loaded" });
+    //         })
+    //       });
+    //   }
+    // });
+    this.GetToken();
+    setTimeout(() => {this.setState({isStarted: true})}, 2000);
   }
-}
+  
+  GetToken() {
+    try {
+      AsyncStorage.getItem('@token:key').then((access_token) => {
+        if (access_token !== null) {
+          console.log("token got: " + access_token);
+          // Network.token = access_token;
+          // AppStorage.postEvent("SAVE_TOKEN", access_token);
+          this.setState({ select: "logged" });
+        } else {
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+        }
+      });
+    } catch (error) {
+      console.log("cannot get token");
+    }
+  }
+  onNavigationStateChange = (prevState: any, currentState: any, action: any) => {
+    if (action.type == "Navigation/NAVIGATE") {
+      // AppStorage.postEvent("SET_FOCUSED_SCREEN", action.routeName);
+    }
+  };
+  render() {
+    const Layout = AuthenticationStack(this.state.select);
+    return this.state.isStarted
+    ?<Layout onNavigationStateChange={(prevState, currentState, action) => { this.onNavigationStateChange(prevState, currentState, action) }} />
+    :<ScreenWelcome/>;
+  }
+
+  // componentWillUnmount() {
+  //   this.unsubscribe();
+  // }
+}
