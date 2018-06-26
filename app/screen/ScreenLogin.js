@@ -4,12 +4,16 @@ import {
     View,
     Text,
     StyleSheet,
-    Image
+    Image,
+    TouchableOpacity
 } from 'react-native';
 import { Input, CheckBox, Button } from 'react-native-elements';
 export default class ScreenLogin extends Component<any, any> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            isRemember:false
+        };
     }
     componentDidMount() {
         // setTimeout(() => {this.props.navigation.navigate('RootDrawer')}, 2000);
@@ -57,8 +61,13 @@ export default class ScreenLogin extends Component<any, any> {
                         title="Ghi nhớ"
                         textStyle={styles.rememberText}
                         containerStyle={styles.rememberContainer}
+                        checked={this.state.isRemember}
+                        onPress={() => this.setState({isRemember: !this.state.isRemember})}
                     />
-                    <Text style={styles.resetPass}>Lấy lại mật khẩu?</Text>
+                    <TouchableOpacity onPress={()=>{this.props.navigation.navigate('ScreenResetPassword')}}>
+                        <Text style={styles.resetPass}>Lấy lại mật khẩu?</Text>
+                    </TouchableOpacity>
+
                 </View>
                 <Button
                     title="Đăng nhập"
@@ -117,7 +126,7 @@ const styles = StyleSheet.create({
         color: "#354052",
         fontSize: 14,
         // margin:-3,
-        marginTop: 10
+        marginTop: 2
     },
     labelStyle: {
         fontSize: 14,
@@ -159,7 +168,7 @@ const styles = StyleSheet.create({
     },
     rememberContainer: {
         backgroundColor: "#FFFFFF",
-        marginLeft: -12,
+        marginLeft: -11,
         borderWidth: 0
     }
 });

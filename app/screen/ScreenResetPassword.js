@@ -24,7 +24,7 @@ export default class ScreenResetPassword extends Component<any, any> {
             <Text style={{ fontSize: 24, color: "#354052",marginTop: 10 }}>Lấy lại mật khẩu</Text>
             <View style={styles.loginSwitch}>
                 <Text style={{ fontSize: 14, color: "#7F8FA4" }}>Bạn đã có tài khoản Xinkciti</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{this.props.navigation.navigate('ScreenLogin')}}>
                     <Text style={{ fontSize: 14, color: "#354052" }}>Đăng nhập</Text>
                 </TouchableOpacity>
             </View>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         color: "#354052",
         fontSize: 14,
         // margin:-3,
-        marginTop: 10
+        marginTop: 2
     },
     note:{
         // backgroundColor:"red",
