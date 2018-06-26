@@ -11,4 +11,13 @@ export class UserApi {
 
         return res;
     }
+    static async resetPassword(email: string) {
+        let data = {
+            email
+        };
+        console.log(data);
+        let res = await Network.post("/account/resetpassword", data);
+
+        return res;
+    }
 }

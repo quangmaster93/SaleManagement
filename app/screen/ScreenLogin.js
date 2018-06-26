@@ -6,15 +6,49 @@ import {
     StyleSheet,
     Image,
     TouchableOpacity,
-    StatusBar
+    StatusBar,
+    AsyncStorage
 } from 'react-native';
 import { Input, CheckBox, Button } from 'react-native-elements';
+import { UserApi } from '../api/UserApi';
+import { Network } from '../api/Network'
 export default class ScreenLogin extends Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
-            isRemember:false
+            isRemember: false,
+            userName: "",
+            password: "",
+            isHidePassword:true
         };
+    }
+    Login = async () => {
+        let data = await UserApi.getToken(this.state.userName, this.state.password);
+        if(data.status){
+            let token=data.meta.token;
+            Network.token=token;
+            if(this.state.isRemember){
+                this.SaveToken(token);
+            }   
+            this.props.navigation.navigate('RootDrawer');
+        }
+        console.log(data)
+    }
+    SaveToken=(token:string)=>{
+        try {
+            AsyncStorage.setItem('@token:key', token).then(() => {
+                console.log("token is saved!");
+            });
+
+        } catch (error) {
+            console.log("token is not saved!")
+        }
+    }
+    EditUserName = (userName: string) => {
+        this.setState({ userName })
+    }
+    EditPassword = (password: string) => {
+        this.setState({ password })
     }
     componentDidMount() {
         // setTimeout(() => {this.props.navigation.navigate('RootDrawer')}, 2000);
@@ -35,6 +69,7 @@ export default class ScreenLogin extends Component<any, any> {
 
                     <Input
                         // placeholder='Tên người dùng'
+                        onChangeText={(userName) => this.EditUserName(userName)}
                         shake={true}
                         containerStyle={{ width: "100%", marginTop: 5 }}
                         inputContainerStyle={styles.inputComponentStyle}
@@ -48,11 +83,13 @@ export default class ScreenLogin extends Component<any, any> {
                     </View>
                     <Input
                         // placeholder='Mật khẩu'
+                        secureTextEntry={this.state.isHidePassword}
+                        onChangeText={(password) => this.EditPassword(password)}
                         shake={true}
                         containerStyle={{ width: "100%", marginTop: 5 }}
                         inputContainerStyle={styles.inputComponentStyle}
                         inputStyle={styles.inputStyle}
-                        rightIcon={<Image style={styles.eyeIcon} source={require('../image/eye.png')}></Image>}
+                        rightIcon={<TouchableOpacity onPress={() => {this.setState({isHidePassword:!this.state.isHidePassword})}}><Image style={styles.eyeIcon} source={require('../image/eye.png')}></Image></TouchableOpacity>}
                     />
                 </View>
                 <View style={styles.remembervsreset}>
@@ -63,14 +100,15 @@ export default class ScreenLogin extends Component<any, any> {
                         textStyle={styles.rememberText}
                         containerStyle={styles.rememberContainer}
                         checked={this.state.isRemember}
-                        onPress={() => this.setState({isRemember: !this.state.isRemember})}
+                        onPress={() => this.setState({ isRemember: !this.state.isRemember })}
                     />
-                    <TouchableOpacity onPress={()=>{this.props.navigation.navigate('ScreenResetPassword')}}>
+                    <TouchableOpacity onPress={() => { this.props.navigation.navigate('ScreenResetPassword') }}>
                         <Text style={styles.resetPass}>Lấy lại mật khẩu?</Text>
                     </TouchableOpacity>
 
                 </View>
                 <Button
+                    onPress={() => { this.Login() }}
                     title="Đăng nhập"
                     titleStyle={{ color: "#FFFFFF", fontSize: 17 }}
                     buttonStyle={{

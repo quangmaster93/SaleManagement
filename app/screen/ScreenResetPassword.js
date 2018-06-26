@@ -10,9 +10,23 @@ import {
 
 } from 'react-native';
 import { Input, CheckBox, Button } from 'react-native-elements';
+import { UserApi } from '../api/UserApi';
 export default class ScreenResetPassword extends Component<any, any> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            email:""
+        };
+    }
+    Submit=async ()=>{
+        let data = await UserApi.resetPassword(this.state.email);
+        if(data.status){
+            this.props.navigation.navigate('ScreenLogin');
+        }
+        console.log(data)
+    }
+    EditEmail = (email: string) => {
+        this.setState({ email })
     }
     componentDidMount() {
 
@@ -31,6 +45,7 @@ export default class ScreenResetPassword extends Component<any, any> {
             <View style={{marginTop:15}}>
                 <Text style={{ fontSize: 14, color: "#7F8FA4" }}>Email:</Text>
                 <Input
+                    onChangeText={(email) => this.EditEmail(email)}
                     shake={true}
                     containerStyle={{width: "100%",marginTop: 5}}
                     inputContainerStyle={styles.inputComponentStyle}
@@ -38,6 +53,7 @@ export default class ScreenResetPassword extends Component<any, any> {
                 />
             </View>
             <Button
+                onPress={this.Submit}
                 title="Lấy lại mật khẩu"
                 titleStyle={ {color: "#FFFFFF", fontSize: 17 }}
                 buttonStyle={{
@@ -55,7 +71,6 @@ export default class ScreenResetPassword extends Component<any, any> {
         </View >
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
