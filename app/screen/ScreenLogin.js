@@ -5,7 +5,8 @@ import {
     Text,
     StyleSheet,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    StatusBar
 } from 'react-native';
 import { Input, CheckBox, Button } from 'react-native-elements';
 export default class ScreenLogin extends Component<any, any> {
@@ -20,7 +21,7 @@ export default class ScreenLogin extends Component<any, any> {
     }
     render() {
         return <View style={styles.container}>
-            {/* <StatusBar translucent backgroundColor="rgba(255, 255, 255, 0)"></StatusBar> */}
+            <StatusBar translucent backgroundColor="rgba(255, 255, 255, 0)"></StatusBar>
             <View style={styles.logoContainer}>
                 <Image style={styles.logo} source={require('../image/small-logo.png')}></Image>
                 <Text style={styles.loginText}>Đăng nhập</Text>
