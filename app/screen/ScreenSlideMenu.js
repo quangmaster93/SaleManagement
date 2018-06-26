@@ -25,21 +25,21 @@ export default class ScreenSlideMenu extends Component<any, any> {
             </View>
 
             <View style={styles.menu}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => {this.props.navigation.navigate("ScreenAppInfo")}}>
                     <View style={styles.menuBlock}>
                         <Image style={styles.menuIcon} source={require('../image/cloud.png')}></Image>
                         <Text style={{ fontSize: 20, color: "#14344D" }}>Thông tin ứng dụng</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => {this.props.navigation.navigate("ScreenSetting")}}>
                     <View style={styles.menuBlock}>
                         <Image style={styles.menuIcon} source={require('../image/setting.png')}></Image>
                         <Text style={{ fontSize: 20, color: "#14344D" }}>Cài đặt chung</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => {this.props.navigation.navigate("UserInfoStack")}}>
                     <View style={styles.menuBlock}>
                         <Image style={styles.menuIcon} source={require('../image/user.png')}></Image>
                         <Text style={{ fontSize: 20, color: "#14344D" }}>Thông tin cá nhân</Text>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingTop: 8,
         borderBottomColor: "#BCBBC1",
-        borderBottomWidth: 0.7,
+        borderBottomWidth: 1,
         paddingBottom:8
     },
     menuIcon: {
