@@ -7,7 +7,7 @@ import {
 
 } from 'react-native';
 
-export default class ScreenMap extends Component<any, any> {
+export default class ScreenAppInfo extends Component<any, any> {
     constructor(props: any) {
         super(props);
     }
@@ -18,7 +18,13 @@ export default class ScreenMap extends Component<any, any> {
         return <View>
             <StatusBar translucent backgroundColor="#416af3"></StatusBar>
             <Text>
-                ScreenMap
+                AppInfo
+            </Text>
+            <Text>
+                AppInfo
+            </Text>
+            <Text>
+                AppInfo
             </Text>
         </View>
     }

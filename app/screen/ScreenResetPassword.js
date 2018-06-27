@@ -10,9 +10,47 @@ import {
 
 } from 'react-native';
 import { Input, CheckBox, Button } from 'react-native-elements';
+import { UserApi } from '../api/UserApi';
+import NotificationModal from '../component/NotificationModal'
 export default class ScreenResetPassword extends Component<any, any> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            email:""
+        };
+    }
+    Submit=async ()=>{
+        let data = await UserApi.resetPassword(this.state.email);
+        if(data.status){
+            this.props.navigation.navigate('ScreenLogin');
+        }
+        else{
+            let message="Đã xảy ra lỗi!"
+            if(data.message){
+                message=data.message;
+            }
+            this.modalData.message=message;
+            this.DisplayModal();
+        }
+        console.log(data)
+    }
+    EditEmail = (email: string) => {
+        this.setState({ email })
+    }
+    modalData = {
+        isVisible:false,
+        title: "THÔNG BÁO",
+        message: "dasfgfds fdsfsdf",
+        imageLink: require('../image/attention.png'),
+        closeText: "Đóng"
+    }
+    HideModal = () => {
+        this.modalData.isVisible=false;
+        this.forceUpdate();
+    }
+    DisplayModal = () => {
+        this.modalData.isVisible=true;
+        this.forceUpdate();
     }
     componentDidMount() {
 
@@ -20,6 +58,13 @@ export default class ScreenResetPassword extends Component<any, any> {
     render() {
         return <View style={styles.container}>
         <StatusBar translucent backgroundColor="rgba(255, 255, 255, 0)"></StatusBar>
+        <NotificationModal isVisible={this.modalData.isVisible}
+                title={this.modalData.title}
+                imageLink={this.modalData.imageLink}
+                message={this.modalData.message}
+                closeText={this.modalData.closeText}
+                HideModal={this.HideModal}>
+            </NotificationModal>
             <Image style={{marginTop:75}} source={require('../image/small-logo.png')}></Image>
             <Text style={{ fontSize: 24, color: "#354052",marginTop: 10 }}>Lấy lại mật khẩu</Text>
             <View style={styles.loginSwitch}>
@@ -31,6 +76,7 @@ export default class ScreenResetPassword extends Component<any, any> {
             <View style={{marginTop:15}}>
                 <Text style={{ fontSize: 14, color: "#7F8FA4" }}>Email:</Text>
                 <Input
+                    onChangeText={(email) => this.EditEmail(email)}
                     shake={true}
                     containerStyle={{width: "100%",marginTop: 5}}
                     inputContainerStyle={styles.inputComponentStyle}
@@ -38,6 +84,7 @@ export default class ScreenResetPassword extends Component<any, any> {
                 />
             </View>
             <Button
+                onPress={this.Submit}
                 title="Lấy lại mật khẩu"
                 titleStyle={ {color: "#FFFFFF", fontSize: 17 }}
                 buttonStyle={{
@@ -55,7 +102,6 @@ export default class ScreenResetPassword extends Component<any, any> {
         </View >
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,

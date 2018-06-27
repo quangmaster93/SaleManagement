@@ -2,7 +2,7 @@ import { ResponseModel } from "../models/ResponseModel";
 
 export default class Network {
     static endpoint = "https://salerouters.xinkciti.com/api";
-
+    static token="";
     static async get(path, callBack, endpoint) {
         try {
             endpoint = endpoint || Network.endpoint;

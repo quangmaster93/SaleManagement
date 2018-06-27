@@ -11,7 +11,13 @@ export class UserApi {
 
         return res;
     }
-
+    static async resetPassword(email: string) {
+        let data = {
+            email
+        };
+        console.log(data);
+        let res = await Network.post("/account/resetpassword", data);
+    }
     static async getUserSchedule(page: number = 1, size: number = 10, getAll: boolean = false, from: string = "", to: string = "") {
         let path = `/Schedule/GetUserSchedule?page=${page}&offset=${size}&getAll=${getAll.toString()}&from=${from}&to=${to}`
         console.log(path);
