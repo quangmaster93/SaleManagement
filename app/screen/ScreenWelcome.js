@@ -17,7 +17,7 @@ export default class ScreenWelcome extends Component<any, any> {
         this.haveToken = false;
     }
     componentDidMount() {
-        this.GetToken();
+        // this.GetToken();
         setTimeout(() => {
             if (this.haveToken) {
                 this.props.navigation.navigate('RootDrawer');

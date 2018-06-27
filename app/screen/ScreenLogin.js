@@ -12,6 +12,7 @@ import {
 import { Input, CheckBox, Button } from 'react-native-elements';
 import { UserApi } from '../api/UserApi';
 import Network from '../api/Network'
+import NotificationModal from '../component/NotificationModal'
 export default class ScreenLogin extends Component<any, any> {
     constructor(props: any) {
         super(props);
@@ -19,22 +20,46 @@ export default class ScreenLogin extends Component<any, any> {
             isRemember: false,
             userName: "",
             password: "",
-            isHidePassword:true
+            isHidePassword: true,
         };
+    }
+    modalData = {
+        isVisible:false,
+        title: "THÔNG BÁO",
+        message: "dasfgfds fdsfsdf",
+        imageLink: require('../image/attention.png'),
+        closeText: "Đóng"
+    }
+    HideModal = () => {
+        this.modalData.isVisible=false;
+        this.forceUpdate();
+    }
+    DisplayModal = () => {
+        this.modalData.isVisible=true;
+        this.forceUpdate();
     }
     Login = async () => {
         let data = await UserApi.getToken(this.state.userName, this.state.password);
-        if(data.status){
-            let token=data.meta.token;
-            Network.token=token;
-            if(this.state.isRemember){
+        if (data.status) {
+            let token = data.meta.token;
+            Network.token = token;
+            if (this.state.isRemember) {
                 this.SaveToken(token);
-            }   
+            }
             this.props.navigation.navigate('RootDrawer');
         }
+        else{
+            let message="Đã xảy ra lỗi!"
+            if(data.message){
+                message=data.message;
+            }
+            this.modalData.message=message;
+            this.DisplayModal();
+        }
         console.log(data)
+        // this.DisplayModal();
     }
-    SaveToken=(token:string)=>{
+    SaveToken = (token: string) => {
         try {
             AsyncStorage.setItem('@token:key', token).then(() => {
                 console.log("token is saved!");
@@ -55,6 +80,13 @@ export default class ScreenLogin extends Component<any, any> {
     }
     render() {
         return <View style={styles.container}>
+            <NotificationModal isVisible={this.modalData.isVisible}
+                title={this.modalData.title}
+                imageLink={this.modalData.imageLink}
+                message={this.modalData.message}
+                closeText={this.modalData.closeText}
+                HideModal={this.HideModal}>
+            </NotificationModal>
             <StatusBar translucent backgroundColor="rgba(255, 255, 255, 0)"></StatusBar>
             <View style={styles.logoContainer}>
                 <Image style={styles.logo} source={require('../image/small-logo.png')}></Image>
@@ -89,7 +121,7 @@ export default class ScreenLogin extends Component<any, any> {
                         containerStyle={{ width: "100%", marginTop: 5 }}
                         inputContainerStyle={styles.inputComponentStyle}
                         inputStyle={styles.inputStyle}
-                        rightIcon={<TouchableOpacity onPress={() => {this.setState({isHidePassword:!this.state.isHidePassword})}}><Image style={styles.eyeIcon} source={require('../image/eye.png')}></Image></TouchableOpacity>}
+                        rightIcon={<TouchableOpacity onPress={() => { this.setState({ isHidePassword: !this.state.isHidePassword }) }}><Image style={styles.eyeIcon} source={require('../image/eye.png')}></Image></TouchableOpacity>}
                     />
                 </View>
                 <View style={styles.remembervsreset}>
