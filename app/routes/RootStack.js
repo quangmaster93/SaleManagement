@@ -3,6 +3,7 @@ import { createStackNavigator, createDrawerNavigator, createTabNavigator  } from
 import ScreenMap from '../screen/ScreenMap';
 import ScreenNotification from '../screen/ScreenNotification';
 import {ScheduleTab} from './ScheduleTab'
+import ScreenScheduleDetail from '../screen/ScreenScheduleDetail';
 export const RootStack =   createStackNavigator(
         {
             ScreenMap: {
@@ -13,6 +14,9 @@ export const RootStack =   createStackNavigator(
             },
             ScreenNotification:{
                 screen:ScreenNotification
+            },
+            ScreenScheduleDetail: {
+                screen: ScreenScheduleDetail
             }
         }
     );
