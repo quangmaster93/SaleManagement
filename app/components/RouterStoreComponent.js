@@ -31,7 +31,7 @@ export default class RouterStoreComponent extends Component<Props, any> {
         let done = !!store.checkout_time;
         return <View>
             <TouchableOpacity style={styles.container}
-                onPress={() => { NavigationService.navigate('ScreenScheduleDetail', { store }); }}>
+                onPress={() => { NavigationService.navigate('ScreenStore', { store }); }}>
                 <View style={styles.iconWrap}>
                     <View style={{
                         borderColor: done ? "#71CA3A" : "#8A8A8F",

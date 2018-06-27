@@ -68,7 +68,7 @@ export default class ScheduleComponent extends Component<Schedule, any> {
                                 height: 1,
                                 backgroundColor: "#fff"
                             }}></View>
-                            <Text style={{textAlign: "center", fontSize: 10, color: "#fff"}}>{date.months() + 1}</Text>
+                            <Text style={{textAlign: "center", fontSize: 10, color: "#fff"}}>{date.month() + 1}</Text>
                             
                         </View>
                     </View>

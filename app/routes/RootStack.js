@@ -4,6 +4,7 @@ import ScreenMap from '../screen/ScreenMap';
 import ScreenNotification from '../screen/ScreenNotification';
 import {ScheduleTab} from './ScheduleTab'
 import ScreenScheduleDetail from '../screen/ScreenScheduleDetail';
+import ScreenStore from '../screen/ScreenStore';
 export const RootStack =   createStackNavigator(
         {
             ScreenMap: {
@@ -17,6 +18,9 @@ export const RootStack =   createStackNavigator(
             },
             ScreenScheduleDetail: {
                 screen: ScreenScheduleDetail
+            },
+            ScreenStore: {
+                screen: ScreenStore
             }
         }
     );
