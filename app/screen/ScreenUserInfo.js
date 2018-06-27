@@ -44,15 +44,21 @@ export default class ScreenUserInfo extends Component<any, any> {
                 <Text style={{ fontSize: 14, color: "#14344D" }}>Quảng Nam</Text>
             </View>
             <View style={styles.direction}>
-                <View style={styles.setting}>
-                    <Image source={require('../image/setting-user.png')}></Image>
-                    <Text style={{ fontSize: 17, color: "#14344D" }}>Cài đặt</Text>
-                </View>
+                <TouchableOpacity style={styles.setting}>
+                    <View style={styles.setting}>
+                        <Image source={require('../image/setting-user.png')}></Image>
+                        <Text style={{ fontSize: 17, color: "#14344D" }}>Cài đặt</Text>
+                    </View>
+                </TouchableOpacity>
+
                 <View style={styles.divider}></View>
-                <View style={styles.changePassword}>
-                    <Image source={require('../image/edit-user.png')}></Image>
-                    <Text style={{ fontSize: 17, color: "#14344D" }}>Thay đổi mật khẩu</Text>
-                </View>
+                <TouchableOpacity style={styles.changePassword} onPress={()=>{this.props.navigation.navigate("ScreenChangePassword")}}>
+                    <View style={styles.changePassword}>
+                        <Image source={require('../image/edit-user.png')}></Image>
+                        <Text style={{ fontSize: 17, color: "#14344D" }}>Thay đổi mật khẩu</Text>
+                    </View>
+                </TouchableOpacity>
+
             </View>
             <Image style={styles.fixedrec} source={require('../image/subtract.png')}></Image>
         </View>
@@ -118,25 +124,25 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     direction: {
-        marginTop:45,
+        marginTop: 45,
         flexDirection: 'row',
         justifyContent: "center",
     },
     setting: {
-        width:"49%",
+        width: "49%",
         flexDirection: 'column',
         alignItems: "center",
         justifyContent: "center",
     },
     divider: {
-        height:53,
-        width:0.5,
-        backgroundColor:"#7383A1",
+        height: 53,
+        width: 0.5,
+        backgroundColor: "#7383A1",
         // marginRight:50,
         // marginLeft:50,
     },
     changePassword: {
-        width:"49%",
+        width: "49%",
         flexDirection: 'column',
         alignItems: "center",
         justifyContent: "center",
