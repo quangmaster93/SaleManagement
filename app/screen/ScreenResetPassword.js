@@ -16,20 +16,20 @@ export default class ScreenResetPassword extends Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
-            email:""
+            email: ""
         };
     }
-    Submit=async ()=>{
+    Submit = async () => {
         let data = await UserApi.resetPassword(this.state.email);
-        if(data.status){
+        if (data.status) {
             this.props.navigation.navigate('ScreenLogin');
         }
-        else{
-            let message="Đã xảy ra lỗi!"
-            if(data.message){
-                message=data.message;
+        else {
+            let message = "Đã xảy ra lỗi!"
+            if (data.message) {
+                message = data.message;
             }
-            this.modalData.message=message;
+            this.modalData.message = message;
             this.DisplayModal();
         }
         console.log(data)
@@ -38,18 +38,18 @@ export default class ScreenResetPassword extends Component<any, any> {
         this.setState({ email })
     }
     modalData = {
-        isVisible:false,
+        isVisible: false,
         title: "THÔNG BÁO",
         message: "dasfgfds fdsfsdf",
         imageLink: require('../image/attention.png'),
         closeText: "Đóng"
     }
     HideModal = () => {
-        this.modalData.isVisible=false;
+        this.modalData.isVisible = false;
         this.forceUpdate();
     }
     DisplayModal = () => {
-        this.modalData.isVisible=true;
+        this.modalData.isVisible = true;
         this.forceUpdate();
     }
     componentDidMount() {
@@ -57,28 +57,28 @@ export default class ScreenResetPassword extends Component<any, any> {
     }
     render() {
         return <View style={styles.container}>
-        <StatusBar translucent backgroundColor="rgba(255, 255, 255, 0)"></StatusBar>
-        <NotificationModal isVisible={this.modalData.isVisible}
+            <StatusBar translucent backgroundColor="rgba(255, 255, 255, 0)"></StatusBar>
+            <NotificationModal isVisible={this.modalData.isVisible}
                 title={this.modalData.title}
                 imageLink={this.modalData.imageLink}
                 message={this.modalData.message}
                 closeText={this.modalData.closeText}
                 HideModal={this.HideModal}>
             </NotificationModal>
-            <Image style={{marginTop:75}} source={require('../image/small-logo.png')}></Image>
-            <Text style={{ fontSize: 24, color: "#354052",marginTop: 10 }}>Lấy lại mật khẩu</Text>
+            <Image style={{ marginTop: 75 }} source={require('../image/small-logo.png')}></Image>
+            <Text style={{ fontSize: 24, color: "#354052", marginTop: 10 }}>Lấy lại mật khẩu</Text>
             <View style={styles.loginSwitch}>
                 <Text style={{ fontSize: 14, color: "#7F8FA4" }}>Bạn đã có tài khoản Xinkciti</Text>
-                <TouchableOpacity onPress={()=>{this.props.navigation.navigate('ScreenLogin')}}>
+                <TouchableOpacity onPress={() => { this.props.navigation.navigate('ScreenLogin') }}>
                     <Text style={{ fontSize: 14, color: "#354052" }}>Đăng nhập</Text>
                 </TouchableOpacity>
             </View>
-            <View style={{marginTop:15}}>
+            <View style={{ marginTop: 15 }}>
                 <Text style={{ fontSize: 14, color: "#7F8FA4" }}>Email:</Text>
                 <Input
                     onChangeText={(email) => this.EditEmail(email)}
                     shake={true}
-                    containerStyle={{width: "100%",marginTop: 5}}
+                    containerStyle={{ width: "100%", marginTop: 5 }}
                     inputContainerStyle={styles.inputComponentStyle}
                     inputStyle={styles.inputStyle}
                 />
@@ -86,7 +86,7 @@ export default class ScreenResetPassword extends Component<any, any> {
             <Button
                 onPress={this.Submit}
                 title="Lấy lại mật khẩu"
-                titleStyle={ {color: "#FFFFFF", fontSize: 17 }}
+                titleStyle={{ color: "#FFFFFF", fontSize: 17 }}
                 buttonStyle={{
                     backgroundColor: "#1A91EB",
                     width: "100%",
@@ -94,10 +94,10 @@ export default class ScreenResetPassword extends Component<any, any> {
                     borderWidth: 0,
                     borderRadius: 4,
                 }}
-                containerStyle={{ width: "100%", shadowColor: "#FFFFFF",marginTop:30 }}
+                containerStyle={{ width: "100%", shadowColor: "#FFFFFF", marginTop: 30 }}
             />
             <View style={styles.note}>
-                <Text style={{fontSize:14,color:"#1A91EB"}}>*Sau khi lấy lại mật khẩu, vui lòng xác thực tài khoản bằng link liên kết đã được gửi qua email</Text>
+                <Text style={{ fontSize: 14, color: "#1A91EB" }}>*Sau khi lấy lại mật khẩu, vui lòng xác thực tài khoản bằng link liên kết đã được gửi qua email</Text>
             </View>
         </View >
     }
@@ -111,15 +111,15 @@ const styles = StyleSheet.create({
         paddingLeft: 42,
         paddingRight: 42,
     },
-    loginSwitch:{
-        marginTop:7,
-        paddingLeft:7,
-        paddingRight:7,
-        width:"100%",
+    loginSwitch: {
+        marginTop: 7,
+        paddingLeft: 7,
+        paddingRight: 7,
+        width: "100%",
         flexDirection: 'row',
         justifyContent: "space-between"
     },
-    inputComponentStyle:{
+    inputComponentStyle: {
         // margin:0,
         width: "100%",
         borderWidth: 1,
@@ -127,19 +127,19 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         // padding:0
         height: 37,
-        
+
     },
-    inputStyle:{
+    inputStyle: {
         color: "#354052",
         fontSize: 14,
         // margin:-3,
         marginTop: 2
     },
-    note:{
+    note: {
         // backgroundColor:"red",
-        flex:1,
+        flex: 1,
         // height:"100%",
         justifyContent: "flex-end",
-        paddingBottom:20
+        paddingBottom: 20
     }
 })

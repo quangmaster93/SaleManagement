@@ -22,5 +22,8 @@ export const RootStack =   createStackNavigator(
             ScreenStore: {
                 screen: ScreenStore
             }
-        }
+        },
+        // {
+        //     headerMode: "none"
+        // }
     );

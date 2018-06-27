@@ -66,6 +66,8 @@ const styles = StyleSheet.create({
         padding:0,
         paddingBottom:15,
         borderRadius:4,
+        paddingRight:15,
+        paddingLeft:15,
     },
     closeButton:{
         height:33,

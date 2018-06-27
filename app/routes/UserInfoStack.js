@@ -10,5 +10,8 @@ export const UserInfoStack =   createStackNavigator(
             ScreenChangePassword: {
                 screen: ScreenChangePassword,
             }
+        },
+        {
+            headerMode: "none"
         }
     );

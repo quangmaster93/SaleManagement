@@ -8,7 +8,7 @@ import {
     Image,
     AsyncStorage
 } from 'react-native';
-import { Network } from '../api/Network'
+import Network from '../api/Network'
 
 export default class ScreenWelcome extends Component<any, any> {
     haveToken: boolean;
@@ -17,7 +17,7 @@ export default class ScreenWelcome extends Component<any, any> {
         this.haveToken = false;
     }
     componentDidMount() {
-        // this.GetToken();
+        this.GetToken();
         setTimeout(() => {
             if (this.haveToken) {
                 this.props.navigation.navigate('RootDrawer');
