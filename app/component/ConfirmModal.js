@@ -47,7 +47,7 @@ export default class ConfirmModal extends Component<ConfirmModalProp, any> {
 
                         <TouchableHighlight onPress={this.props.Confirm}>
                             <View style={styles.closeButton}>
-                                <Text style={{ color: "#FFFFFF", fontSize: 14 }}>{this.props.closeText}</Text>
+                                <Text style={{ color: "#FFFFFF", fontSize: 14 }}>{this.props.confirmText}</Text>
                             </View>
                         </TouchableHighlight>
                     </View>
@@ -74,9 +74,11 @@ const styles = StyleSheet.create({
         maxWidth: "95%",
         flexDirection: 'column',
         alignItems: 'center',
-        padding: 0,
+        paddingRight:15,
+        paddingLeft:15,
         paddingBottom: 15,
         borderRadius: 4,
+
     },
     closeButton: {
         height: 33,

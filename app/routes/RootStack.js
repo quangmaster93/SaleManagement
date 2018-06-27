@@ -18,5 +18,8 @@ export const RootStack =   createStackNavigator(
             ScreenScheduleDetail: {
                 screen: ScreenScheduleDetail
             }
-        }
+        },
+        // {
+        //     headerMode: "none"
+        // }
     );
