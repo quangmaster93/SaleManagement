@@ -8,7 +8,9 @@ import {
     Image,
     AsyncStorage
 } from 'react-native';
-import Network from '../api/Network'
+import Network from '../api/Network';
+import { UserApi } from '../api/UserApi';
+import {User} from "../models/User"
 
 export default class ScreenWelcome extends Component<any, any> {
     haveToken: boolean;
@@ -16,10 +18,15 @@ export default class ScreenWelcome extends Component<any, any> {
         super(props);
         this.haveToken = false;
     }
-    componentDidMount() {
+    async componentDidMount() {
         this.GetToken();
-        setTimeout(() => {
+        setTimeout(async () => {
             if (this.haveToken) {
+                let data = await UserApi.getUserInfo();
+                if(data && data.status){
+                    let userInfo:User=data.data;
+                    User.data=userInfo;
+                }
                 this.props.navigation.navigate('RootDrawer');
             }
             else{
