@@ -23,4 +23,6 @@ export class User {
     skype:string
 
     notReadTotal:string
+    
+    static data:User
 }
