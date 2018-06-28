@@ -27,7 +27,7 @@ export const RootStack =   createStackNavigator(
                 screen: ScreenStore
             }
         },
-        // {
-        //     headerMode: "none"
-        // }
+        {
+            headerMode: "none"
+        }
     );

@@ -12,7 +12,8 @@ import {
 import { Input, CheckBox, Button } from 'react-native-elements';
 import { UserApi } from '../api/UserApi';
 import Network from '../api/Network'
-import NotificationModal from '../component/NotificationModal'
+import NotificationModal from '../component/NotificationModal';
+import {User} from "../models/User"
 export default class ScreenLogin extends Component<any, any> {
     constructor(props: any) {
         super(props);
@@ -45,6 +46,11 @@ export default class ScreenLogin extends Component<any, any> {
             Network.token = token;
             if (this.state.isRemember) {
                 this.SaveToken(token);
+            }
+            let userData = await UserApi.getUserInfo();
+            if(userData && userData.status){
+                let userInfo:User=userData.data;
+                User.data=userInfo;
             }
             this.props.navigation.navigate('RootDrawer');
         }
