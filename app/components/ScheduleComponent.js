@@ -51,7 +51,7 @@ export default class ScheduleComponent extends Component<Schedule, any> {
                     height: 40,
                 }}>
                     <View style={{
-                        backgroundColor: "#7383A1",
+                        backgroundColor: "#019AE8",
                         width: 30,
                         height: 28,
                     }}>
@@ -83,10 +83,10 @@ export default class ScheduleComponent extends Component<Schedule, any> {
                         borderRightWidth: 15,
                         borderBottomWidth: 12,
                         borderLeftWidth: 15,
-                        borderTopColor: '#7383A1',
-                        borderRightColor: '#7383A1',
+                        borderTopColor: '#019AE8',
+                        borderRightColor: '#019AE8',
                         borderBottomColor: 'transparent',
-                        borderLeftColor: '#7383A1',
+                        borderLeftColor: '#019AE8',
                     }}/>
                 </View>
             </TouchableOpacity>

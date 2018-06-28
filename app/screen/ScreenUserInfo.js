@@ -59,7 +59,6 @@ export default class ScreenUserInfo extends Component<any, any> {
                     <Text style={{ fontSize: 17, color: "#14344D" }}>Cài đặt</Text>
                 </View>
                 <View style={styles.divider}></View>
-
                 <View style={styles.changePassword}>
                     <TouchableOpacity onPress={() => { this.props.navigation.navigate("ScreenChangePassword") }}>
                         <Image source={require('../image/edit-user.png')}></Image>
