@@ -27,11 +27,11 @@ export default class ScreenUserInfo extends Component<any, any> {
         return <View style={styles.container}>
             <StatusBar translucent backgroundColor="#416af3"></StatusBar>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => { this.props.navigation.navigate("RootStack") }}>
+                <TouchableOpacity onPress={() => { this.props.navigation.goBack(null);this.props.navigation.openDrawer() }}>
                     <Image style={styles.backIcon} source={require('../image/back.png')}></Image>
                 </TouchableOpacity>
                 <Text style={{ fontSize: 24, color: "#FFFFFF" }}>
-                    Thông tin ứng dụng
+                    Thông tin cá nhân
                 </Text>
             </View>
             <View style={styles.avatarContainer}>
