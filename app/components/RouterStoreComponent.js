@@ -47,7 +47,7 @@ export default class RouterStoreComponent extends Component<Props, any> {
                             color: done ? "#fff" : "#8A8A8F",
                             fontSize: 13,
                             marginTop: 2
-                        }}>{this.props.index}</Text>
+                        }}>{this.props.index + 1}</Text>
                     </View>
                 </View>
                 <View style={styles.detailWrap}>

@@ -59,9 +59,38 @@ export default class ScreenScheduleDetail extends Component<any, ComponentState>
         if (!this.state.stores.length) {
             return <View></View>
         }
+        let stores = this.state.stores;
         let startTime = moment(this.state.meta.start_time);
         let endTime = moment(this.state.meta.end_time);
+        let countAll = stores.length;
+        let countDone = stores.filter((s: RouterStore) => {
+            return s.checkin_time && s.checkout_time;
+        }).length;
         return <View style={{ backgroundColor: "#ffffff", display: "flex", flex: 1 }}>
+            <View style={{
+                backgroundColor: "#5F84FD",
+                paddingBottom: 10,
+                flexDirection: "row"
+            }}>
+                <TouchableOpacity style={{ width: 50, height: 50, alignItems: "center", justifyContent: "center" }}
+                onPress={() => {this.props.navigation.goBack()}}>
+                    <Image style={{ width: 16, height: 16 }} source={require('../image/arrow.png')}></Image>
+                </TouchableOpacity>
+                <View style={{ flex: 1, flexDirection: "row" }}>
+                    <View style={{ flex: 1 }}>
+                        <Text style={{ fontSize: 20, marginTop: 10, color: "#fff" }}>{this.schedule.name}</Text>
+                        <Text style={{ fontSize: 12, color: "#fff" }}>{`Bắt đầu: ${"5:30"}, Tổng: ${countAll}, hoàn thành: ${countDone}`}</Text>
+                    </View>
+                    <View style={{ width: 80, alignContent: "center", alignItems: "center" }}>
+                        <View>
+                            <Text style={{ textAlign: "center", fontSize: 20, fontWeight: "bold", color: "#fff", marginTop: 5 }}>{`${(countDone * 100) / countAll}%`}</Text>
+                        </View>
+                        <TouchableOpacity style={{ marginTop: 3 }}>
+                            <Image style={{ height: 16, resizeMode: "contain" }} source={require('../image/arrow-right.png')}></Image>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
             <FlatList
                 data={this.state.stores}
                 renderItem={({ item, index }) => <RouterStoreComponent store={item} index={index} />}

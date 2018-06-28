@@ -36,7 +36,7 @@ export default class ScreenUserInfo extends Component<any, any> {
 
                 </View>
                 <View style={styles.avatarOutsite}>
-                    <Image style={styles.avatar} source={require('../image/user-default.png')}></Image>
+                    <Image style={styles.avatar} source={require('../image/user-default.jpg')}></Image>
                 </View>
             </View>
             <Text>
