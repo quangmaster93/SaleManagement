@@ -21,12 +21,12 @@ export default class ScreenResetPassword extends Component<any, any> {
     }
     Submit = async () => {
         let data = await UserApi.resetPassword(this.state.email);
-        if (data.status) {
+        if (data && data.status) {
             this.props.navigation.navigate('ScreenLogin');
         }
         else {
             let message = "Đã xảy ra lỗi!"
-            if (data.message) {
+            if (data && data.message) {
                 message = data.message;
             }
             this.modalData.message = message;

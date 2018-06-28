@@ -40,7 +40,7 @@ export default class ScreenLogin extends Component<any, any> {
     }
     Login = async () => {
         let data = await UserApi.getToken(this.state.userName, this.state.password);
-        if (data.status) {
+        if (data && data.status) {
             let token = data.meta.token;
             Network.token = token;
             if (this.state.isRemember) {
@@ -50,7 +50,7 @@ export default class ScreenLogin extends Component<any, any> {
         }
         else{
             let message="Đã xảy ra lỗi!"
-            if(data.message){
+            if(data && data.message){
                 message=data.message;
             }
             this.modalData.message=message;

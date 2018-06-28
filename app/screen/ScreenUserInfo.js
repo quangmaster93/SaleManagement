@@ -9,11 +9,17 @@ import {
     Image
 
 } from 'react-native';
-
+import {User} from "../models/User"
+import Common from "../config/common"
 export default class ScreenUserInfo extends Component<any, any> {
+    userInfo:User
+    avatarPath:string
     constructor(props: any) {
         super(props);
+        this.userInfo=User.data;
+        this.avatarPath=Common.domain+this.userInfo.avatar_path +"/"+this.userInfo.avatar
     }
+    
     componentDidMount() {
 
     }
@@ -33,31 +39,34 @@ export default class ScreenUserInfo extends Component<any, any> {
                 <View style={styles.whiteBlock}></View>
                 <View style={styles.avatarOutsiteContainer}>
                     <View style={styles.avatarOutsite}>
-                        <Image style={styles.avatar} source={require('../image/user-default.jpg')}></Image>
+                        <Image style={styles.avatar} source={{uri: this.avatarPath}}></Image>
                     </View>
                 </View>
             </View>
             <View style={styles.userInfo}>
-                <Text style={{ fontSize: 20, color: "#14344D" }}>{"Trịnh Công Quang".toUpperCase()}</Text>
-                <Text style={{ fontSize: 14, color: "#14344D" }}>133 7451 544</Text>
-                <Text style={{ fontSize: 14, color: "#14344D" }}>quangmaster93@gmail.com</Text>
-                <Text style={{ fontSize: 14, color: "#14344D" }}>Quảng Nam</Text>
+                <Text style={{ fontSize: 20, color: "#14344D" }}>{this.userInfo.fullName.toUpperCase()}</Text>
+                <Text style={{ fontSize: 14, color: "#14344D" }}>{this.userInfo.phoneNumber}</Text>
+                <Text style={{ fontSize: 14, color: "#14344D" }}>{this.userInfo.email}</Text>
+                <Text style={{ fontSize: 14, color: "#14344D" }}>{this.userInfo.address}</Text>
             </View>
             <View style={styles.direction}>
-                <TouchableOpacity style={styles.setting}>
-                    <View style={styles.setting}>
-                        <Image source={require('../image/setting-user.png')}></Image>
-                        <Text style={{ fontSize: 17, color: "#14344D" }}>Cài đặt</Text>
-                    </View>
-                </TouchableOpacity>
 
+                <View style={styles.setting}>
+                    <TouchableOpacity >
+                        <Image source={require('../image/setting-user.png')}></Image>
+                    </TouchableOpacity>
+
+                    <Text style={{ fontSize: 17, color: "#14344D" }}>Cài đặt</Text>
+                </View>
                 <View style={styles.divider}></View>
-                <TouchableOpacity style={styles.changePassword} onPress={()=>{this.props.navigation.navigate("ScreenChangePassword")}}>
-                    <View style={styles.changePassword}>
+
+                <View style={styles.changePassword}>
+                    <TouchableOpacity onPress={() => { this.props.navigation.navigate("ScreenChangePassword") }}>
                         <Image source={require('../image/edit-user.png')}></Image>
-                        <Text style={{ fontSize: 17, color: "#14344D" }}>Thay đổi mật khẩu</Text>
-                    </View>
-                </TouchableOpacity>
+                    </TouchableOpacity>
+
+                    <Text style={{ fontSize: 17, color: "#14344D" }}>Thay đổi mật khẩu</Text>
+                </View>
 
             </View>
             <Image style={styles.fixedrec} source={require('../image/subtract.png')}></Image>

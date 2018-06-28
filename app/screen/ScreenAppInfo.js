@@ -22,7 +22,7 @@ export default class ScreenAppInfo extends Component<any, any> {
         return <View style={styles.container}>
             <StatusBar translucent backgroundColor="#416af3"></StatusBar>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => { this.props.navigation.navigate("RootStack") }}>
+                <TouchableOpacity onPress={() => { this.props.navigation.goBack() }}>
                     <Image style={styles.backIcon} source={require('../image/back.png')}></Image>
                 </TouchableOpacity>
                 <Text style={{ fontSize: 24, color: "#FFFFFF" }}>
