@@ -16,6 +16,7 @@ import { RouterStore } from '../models/RouterStore';
 import { ScheduleApi } from '../api/ScheduleApi';
 import { Button } from 'react-native-elements';
 import moment from 'moment'
+import NavigationService from '../services/NavigationService';
 
 interface ComponentState {
     stores: Array<RouterStore>;
@@ -41,11 +42,9 @@ export default class ScreenScheduleDetail extends Component<any, ComponentState>
     }
 
     async componentDidMount() {
-        console.log(this.props);
         let res = await ScheduleApi.getScheduleDetail(this.schedule.id)
         let stores = res.data;
         let meta = res.meta;
-        console.log(stores);
         this.setState({ stores, meta })
     }
 
@@ -83,10 +82,11 @@ export default class ScreenScheduleDetail extends Component<any, ComponentState>
                     </View>
                     <View style={{ width: 80, alignContent: "center", alignItems: "center" }}>
                         <View>
-                            <Text style={{ textAlign: "center", fontSize: 20, fontWeight: "bold", color: "#fff", marginTop: 5 }}>{`${(countDone * 100) / countAll}%`}</Text>
+                            <Text style={{ textAlign: "center", fontSize: 20, fontWeight: "bold", color: "#fff", marginTop: 5 }}>{`${Math.round((countDone * 100) / countAll)}%`}</Text>
                         </View>
-                        <TouchableOpacity style={{ marginTop: 3 }}>
-                            <Image style={{ height: 16, resizeMode: "contain" }} source={require('../image/arrow-right.png')}></Image>
+                        <TouchableOpacity style={{ marginTop: 3 }}
+                            onPress={() => {NavigationService.navigate('ScreenScheduleMap', { schedule: this.schedule, stores: this.state.stores, meta: this.state.meta });}}>
+                            <Image style={{ height: 30, resizeMode: "contain" }} source={require('../image/sw-map-off.png')}></Image>
                         </TouchableOpacity>
                     </View>
                 </View>

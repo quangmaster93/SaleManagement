@@ -55,7 +55,6 @@ export default class ScreenStore extends Component<any, any> {
                 userWorkingTimeString = `${s}s`;
             }
         }
-        console.log(userWorkingTime);
         return <View style={{ flex: 1 }}>
             <View style={{
                 backgroundColor: "#5F84FD",
